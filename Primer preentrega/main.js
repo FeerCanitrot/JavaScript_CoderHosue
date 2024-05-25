@@ -52,16 +52,29 @@ const papel = 2
 
 const tijera = 3
 
+function pregunta(){
+    if(confirm("¿Quieres jugar de nuevo al piedra pael o tijera?")){
+        ganadas = 0
+        perdidas = 0
+        intento = 0
+        juego()
+    }else{
+        alert("Que mala onda")
+    }
+}
+
 function resultado(){
     if(ganadas<perdidas){
         alert("Terminaste perdinedo "+perdidas+" a "+ganadas)
+        pregunta()
     }else{
         alert("Terminaste ganando "+ganadas+" a "+perdidas)
+        pregunta()
     }
 }
 
 function juego(){
-    while(intento <= 3){
+    while(ganadas <= 2){
         let usuario = prompt("Que vas a elegir(PIEDRA: 1, PAPEL: 2 Y TIJERA 3)")
         let compu = Math.floor(Math.random()*3+1)
         if(!["1", "2", "3"].includes(usuario)){
@@ -73,24 +86,25 @@ function juego(){
             perdidas++
             intento = intento + perdidas
             alert("Perdiste vas "+ganadas+" a "+perdidas)
+            if(perdidas == 3){
+                resultado()
+                break;
+            }
         }else if(usuario == 1 && compu == 3 || usuario == 2 && compu == 1 || usuario == 3 && compu == 2){
             ganadas++
             intento = intento + ganadas
             alert("¡Ganaste! vas "+ganadas+" a "+perdidas)
+            if(ganadas == 3){
+                resultado()
+                break;
+            }
         }else if(usuario == compu){
             alert("¡Empate!");
         }
     }
-    if(confirm("¿Quieres jugar de nuevo?")){
-        juego()
-    }else{
-        alert("Gracias por jugar.")
-    }
 }
 
 juego()
-
-resultado()
 
 
 
