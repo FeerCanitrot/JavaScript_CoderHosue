@@ -52,26 +52,27 @@ function resultado(){
 }
 
 function juego(){
+    const opciones = ["piedra", "papel", "tijera"];
     while(ganadas <= 2){
-        let usuario = prompt("Que vas a elegir(PIEDRA: 1, PAPEL: 2 Y TIJERA 3)")
-        let compu = Math.floor(Math.random()*3+1)
-        if(!["1", "2", "3"].includes(usuario)){
+        let usuario = prompt("Elige piedra, papel o tijera:").toLowerCase()
+        let compu = opciones[Math.floor(Math.random() * opciones.length)]
+        if(!opciones.includes(usuario)){
             alert("Opción no válida. Intenta de nuevo.");
             juego()
             return
         }
-        if(usuario == 1 && compu == 2 || usuario == 2 && compu == 3 || usuario == 3 && compu == 2){
+        if(usuario == "piedra" && compu == "papel" || usuario == "papel" && compu == "tijera" || usuario == "tijera" && compu == "piedra"){
             perdidas++
             intento = intento + perdidas
-            alert("Perdiste vas "+ganadas+" a "+perdidas)
+            alert("¡Perdiste! la compu saco( "+compu+" ) vas "+ganadas+" a "+perdidas)
             if(perdidas == 3){
                 resultado()
                 break;
             }
-        }else if(usuario == 1 && compu == 3 || usuario == 2 && compu == 1 || usuario == 3 && compu == 2){
+        }else if(usuario == "piedra" && compu == "tijera" || usuario == "papel" && compu == "piedra" || usuario == "tijera" && compu == "papel"){
             ganadas++
             intento = intento + ganadas
-            alert("¡Ganaste! vas "+ganadas+" a "+perdidas)
+            alert("¡Ganaste! la compu saco( "+compu+" ) vas "+ganadas+" a "+perdidas)
             if(ganadas == 3){
                 resultado()
                 break;
