@@ -24,12 +24,6 @@ let ganadas = 0
 
 let perdidas = 0
 
-const piedra = 1
-
-const papel = 2
-
-const tijera = 3
-
 function pregunta(){
     if(confirm("¿Quieres jugar de nuevo al piedra pael o tijera?")){
         ganadas = 0
