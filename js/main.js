@@ -16,26 +16,25 @@
 
 // PIEDRA PAPEL Y TIJERA
 
-alert("Juguemos a PIEDRA, PAPEL Y TIJERA contra la maquina. Donde se gana el mejor de 3")
-
-let intento = 0
+let partidas = 0
 
 let ganadas = 0
 
 let perdidas = 0
 
+let j = 0
+
 function pregunta(){
-    if(confirm("¿Quieres jugar de nuevo al piedra pael o tijera?")){
-        ganadas = 0
-        perdidas = 0
-        intento = 0
+    if(confirm("¿Quieres jugar al piedra pael o tijera?")){
+        logueo()
         juego()
     }else{
-        alert("Que mala onda")
+        alert("Se cierra la sesion")
+        logueo()
     }
 }
 
-function resultado(){
+function resultado(ganadas,perdidas){
     if(ganadas<perdidas){
         alert("Terminaste perdinedo "+perdidas+" a "+ganadas)
         pregunta()
@@ -46,9 +45,17 @@ function resultado(){
 }
 
 function juego(){
+    let jugadas = 0
+    
+    let ganadas = 0
+
+    let perdidas = 0
+
+    alert("Bienvenido al juego "+juegos.nombre)
+    mostrarLista()
     const opciones = ["piedra", "papel", "tijera"];
-    while(ganadas <= 2){
-        let usuario = prompt("Elige piedra, papel o tijera:").toLowerCase()
+    while(jugadas <= 5){
+        let usuario = prompt("Elige piedra, papel o tijera:")
         let compu = opciones[Math.floor(Math.random() * opciones.length)]
         if(!opciones.includes(usuario)){
             alert("Opción no válida. Intenta de nuevo.");
@@ -57,24 +64,107 @@ function juego(){
         }
         if(usuario == "piedra" && compu == "papel" || usuario == "papel" && compu == "tijera" || usuario == "tijera" && compu == "piedra"){
             perdidas++
-            intento = intento + perdidas
+            jugadas++
             alert("¡Perdiste! la compu saco( "+compu+" ) vas "+ganadas+" a "+perdidas)
-            if(perdidas == 3){
-                resultado()
-                break;
-            }
+            modificarUsuario(false)
         }else if(usuario == "piedra" && compu == "tijera" || usuario == "papel" && compu == "piedra" || usuario == "tijera" && compu == "papel"){
             ganadas++
-            intento = intento + ganadas
+            jugadas++
             alert("¡Ganaste! la compu saco( "+compu+" ) vas "+ganadas+" a "+perdidas)
-            if(ganadas == 3){
-                resultado()
-                break;
-            }
+            modificarUsuario(true)
         }else if(usuario == compu){
             alert("¡Empate!");
+        }
+        if(ganadas + perdidas == 3){
+            resultado(ganadas, perdidas)
         }
     }
 }
 
-juego()
+let usuarios = []
+
+class Juego{
+    constructor(partidas, ganadas, perdidas, nombre, contraseña){
+        this.partidas = partidas
+        this.ganadas = ganadas
+        this.perdidas = perdidas
+        this.nombre = nombre
+        this.contraseña = contraseña
+    }
+}
+
+let juegos = new Juego()
+
+let logueo = () => {
+    nombre = prompt("Ingrese su nombre")
+    contraseña = prompt("Ingrese su contraseña")
+    chequeo(nombre, contraseña)
+}
+
+let chequeo = (nombre,contraseña) => {
+    for (let i = 0; i < usuarios.length; i++) {
+        if(nombre == usuarios[i].nombre){
+            if(contraseña == usuarios[i].contraseña){
+                juegos.nombre = nombre
+                juegos.contraseña = contraseña
+                juegos.partidas = usuarios[i].partidas
+                juegos.ganadas = usuarios[i].ganadas
+                juegos.perdidas = usuarios[i].perdidas
+                juego()
+            }else{
+                alert("Contraseña incorrecta")
+                logueo()
+            }
+        }
+    }
+    if(juegos.nombre != nombre){
+        let usuarioNuevo = {
+            partidas: 0,
+            perdidas: 0,
+            ganadas: 0,
+            nombre: nombre,
+            contraseña: contraseña,
+            ultimaVez: new Date()
+        }
+        usuarios.push(usuarioNuevo)
+        juegos.nombre = nombre
+        juegos.contraseña = contraseña
+        juegos.partidas = usuarioNuevo.partidas
+        juegos.ganadas = usuarioNuevo.ganadas
+        juegos.perdidas = usuarioNuevo.perdidas
+        alert("Se te creo una cuenta nueva!")
+        juego()
+    }
+}
+
+let modificarUsuario = (bool) => {
+    for (let i = 0; i < usuarios.length; i++) {
+        if(usuarios[i].nombre == juegos.nombre){
+            usuarios[i].ultimaVez = new Date()
+            if(bool){
+                usuarios[i].ganadas++
+            }else{
+                usuarios[i].perdidas++
+            }
+            if(j == 5){
+                usuarios[i].partidas++
+                j = 0
+            }
+            j++
+        }
+    }
+}
+
+function mejoresPuntajes(n) {
+    usuarios.sort((a, b) => b.ganadas - a.ganadas);
+    return usuarios.slice(0, n);
+}
+
+function mostrarLista(){
+    let lista = mejoresPuntajes(10)
+    for (let i = 0; i < lista.length; i++) {
+        console.log([i+1]+" "+lista[i].nombre+" "+lista[i].ganadas);
+    }
+}
+
+logueo()
