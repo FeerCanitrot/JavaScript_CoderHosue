@@ -25,7 +25,7 @@ let perdidas = 0
 let j = 0
 
 function pregunta(){
-    if(confirm("¿Quieres jugar al piedra pael o tijera?")){
+    if(confirm("¿Quieres jugar al piedra papel o tijera?")){
         logueo()
         juego()
     }else{
