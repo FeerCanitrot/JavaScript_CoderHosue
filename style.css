@@ -4,18 +4,131 @@
     box-sizing: border-box;
 }
 
-h1{
-    justify-content: center;
-    margin-top: 20%;
-    text-align: center;
-}
-
-p{
-    justify-content: center;
-    margin-top: 20%;
-    text-align: center;
-}
-
 body{
     background-color: rgba(0, 0, 0, 0.411);
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+h1{
+    justify-content: center;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+h3{
+    display: flex;
+    justify-content: center;
+}
+
+.game{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+.game-board{
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.cell{
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    cursor: pointer;
+    grid-template-areas: "draw";
+    display: grid;
+    place-items: center;
+}
+
+.circle::after{
+    content: "";
+    grid-area: draw;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 10px solid black;
+    animation: show .3s;
+}
+
+.cross::after{
+    content: "";
+    grid-area: draw;
+    display: block;
+    width: 10px;
+    height: 70px;
+    background-color: black;
+    transform: rotate(45deg);
+    border-radius: 10px;
+    animation: show-reverse .3s;
+}
+
+.cross::before{
+    content: "";
+    grid-area: draw;
+    display: block;
+    width: 10px;
+    height: 70px;
+    background-color: black;
+    transform: rotate(-45deg);
+    border-radius: 10px;
+    animation: show .3s;
+}
+ 
+@keyframes show{
+    0%{
+        transform: scale(0) rotate(-45deg)
+    }
+    100%{
+        transform: scale(1) rotate(-45deg);
+    }
+}
+
+@keyframes show-reverse{
+    0%{
+        transform: scale(0) rotate(45deg);
+    }
+    100%{
+        transform: scale(1) rotate(45deg);
+    }
+}
+
+.endgame{
+    background-color: #000000e0;
+    color: white;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+    display: grid;
+    place-content: center;
+}
+
+.endgame-show{
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+}
+
+.endgame-button{
+    background-color: rgba(0, 0, 0, 0.678);
+    font-weight: bold;
+    color: white;
+    padding: 1rem 2rem;
+    margin: 0 auto;
+    width: max-content;
+    border: none;
+    border-radius: 100px;
+}
+
+.show{
+    opacity: 1;
+    pointer-events: unset;
 }
