@@ -1,29 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Proyecto Final</title>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>~~~~~ TIC TAC TOE ~~~~~</h1>
-    <div class="game">
-        <article data-id="game-message">
-            <h2>El turno es para <span class="game-turn"></span></h2>
-        </article>
-        <section class="game-board">
-            <div class="cell"></div>
-        </section>
-    </div>
-    <section class="endgame">
-        <div class="endgame-show">
-            <h2 class="endgame-result"></h2>
-            <p>¿Quieres volver a jugar?</p>
-            <button class="endgame-button">Reiniciar el juego</button>
+<body class="light-mode">
+    <div class="container">
+        <h1>Tic Tac Toe</h1>
+        <button id="themeToggle">Modo Noche</button>
+        <form id="playerForm">
+            <input type="text" id="player1" placeholder="Nombre del Jugador 1" required>
+            <input type="text" id="player2" placeholder="Nombre del Jugador 2" required>
+            <button type="submit">Empezar Juego</button>
+        </form>
+        <div id="playerInfo" style="display: none;">
+            <p id="currentPlayerInfo"></p>
         </div>
-    </section>
-    <h3> ~~~~~~~~~~~~~~~~~~~~ </h3>
-    <script src="./js/tercerentrega.js"></script>
+        <div class="game-board" id="gameBoard" style="display: none;">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <button id="restartButton" style="display: none;">Reiniciar Juego</button>
+        <h2>Mejores Resultados</h2>
+        <div id="leaderboard">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jugador</th>
+                        <th>Victorias</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./js/proyectofinal.js"></script>
 </body>
-</html> 
+</html>
