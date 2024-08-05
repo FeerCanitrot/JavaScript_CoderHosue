@@ -5,33 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body class="light-mode">
+<body>
     <div class="container">
         <h1>Tic Tac Toe</h1>
-        <button id="themeToggle">Modo Noche</button>
-        <form id="playerForm">
-            <input type="text" id="player1" placeholder="Nombre del Jugador 1" required>
-            <input type="text" id="player2" placeholder="Nombre del Jugador 2" required>
-            <button type="submit">Empezar Juego</button>
-        </form>
-        <div id="playerInfo" style="display: none;">
-            <p id="currentPlayerInfo"></p>
+        <div class="mode-toggle">
+            <label for="modeSwitch">Modo Oscuro:</label>
+            <input type="checkbox" id="modeSwitch">
         </div>
-        <div class="game-board" id="gameBoard" style="display: none;">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
+        <div class="players">
+            <label for="player1">Jugador 1:</label>
+            <input type="text" id="player1" placeholder="Nombre del jugador 1">
+            <label for="player2">Jugador 2:</label>
+            <input type="text" id="player2" placeholder="Nombre del jugador 2">
         </div>
-        <button id="restartButton" style="display: none;">Reiniciar Juego</button>
-        <h2>Mejores Resultados</h2>
-        <div id="leaderboard">
+        <button id="startBtn">Comenzar Juego</button>
+        <div class="board animate__animated animate__fadeIn"></div>
+        <button id="restartBtn">Reiniciar</button>
+        <button id="exitBtn">Salir</button>
+        <p id="status"></p>
+        <div id="scoreTable" class="score-table">
+            <h2>Tabla de Puntajes</h2>
             <table>
                 <thead>
                     <tr>
@@ -39,11 +36,14 @@
                         <th>Victorias</th>
                     </tr>
                 </thead>
-                <tbody id="leaderboardBody">
+                <tbody id="scoreBoard">
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="./js/proyectofinal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
+
+

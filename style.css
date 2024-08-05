@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --main-bg-color-light: #e5e5e5;
+    --main-bg-color-dark: #2b2b2b;
+    --main-text-color-light: #000000;
+    --main-text-color-dark: #ffffff;
+    --cell-bg-light: #f0f0f0;
+    --cell-bg-dark: #4d4d4d;
+    --highlight-color: #ff6f61;
+    --button-bg-color: #333333;
+    --button-text-color: #ffffff;
+}
+
 body {
     font-family: 'Press Start 2P', cursive;
     display: flex;
@@ -5,177 +19,162 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    transition: background 0.5s, color 0.5s;
-}
-
-body.light-mode {
-    background: linear-gradient(135deg, #dfe9f3 0%, #ffffff 100%);
-    color: #282c34;
+    background-color: var(--main-bg-color-light);
+    color: var(--main-text-color-light);
+    transition: all 0.3s;
 }
 
 body.dark-mode {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: #ffffff;
+    background-color: var(--main-bg-color-dark);
+    color: var(--main-text-color-dark);
 }
 
 .container {
     text-align: center;
+    width: 90%;
+    max-width: 400px;
+    background-color: var(--cell-bg-light);
     padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: background 0.5s, box-shadow 0.5s;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
 }
 
 body.dark-mode .container {
-    background: rgba(0, 0, 0, 0.7);
+    background-color: var(--cell-bg-dark);
 }
 
-h1, h2 {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    transition: color 0.5s;
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
-form {
+.mode-toggle {
     margin-bottom: 20px;
 }
 
-input {
-    padding: 15px;
-    margin: 10px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background 0.5s, color 0.5s, box-shadow 0.5s;
-}
-
-body.light-mode input {
-    background: #ffffff;
-    color: #282c34;
-}
-
-body.dark-mode input {
-    background: #282c34;
-    color: #ffffff;
-}
-
-input:hover {
-    transform: scale(1.05);
-}
-
-button {
-    margin-top: 30px;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #61dafb;
-    color: #282c34;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.5s, color 0.5s;
-}
-
-body.light-mode button {
-    background-color: #61dafb;
-    color: #282c34;
-}
-
-body.dark-mode button {
-    background-color: #21a1f1;
-    color: #ffffff;
-}
-
-button:hover {
-    transform: scale(1.1);
-}
-
-button:active {
-    transform: scale(1);
-}
-
-#playerInfo {
+.players {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
-    font-size: 1.5em;
+    flex-direction: column;
+    align-items: center;
 }
 
-.game-board {
+.players label {
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+}
+
+.players input {
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 2px solid var(--highlight-color);
+    background-color: var(--main-bg-color-light);
+    color: var(--main-text-color-light);
+}
+
+body.dark-mode .players input {
+    background-color: var(--main-bg-color-dark);
+    color: var(--main-text-color-dark);
+}
+
+.board {
     display: grid;
-    grid-template-columns: repeat(3, 150px);
-    gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
 .cell {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    padding-bottom: 100%;
+    background-color: var(--cell-bg-light);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #61dafb;
-    border-radius: 10px;
-    font-size: 3em;
+    font-size: 2rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--highlight-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+    color: var(--main-text-color-light); 
+    line-height: 1; 
 }
 
 body.dark-mode .cell {
-    background: #21a1f1;
+    background-color: var(--cell-bg-dark);
+    color: var(--main-text-color-dark);
 }
 
 .cell:hover {
-    background-color: #21a1f1;
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #dcdcdc;
+    transform: scale(1.05);
 }
 
-table {
-    width: 100%;
+#restartBtn, #exitBtn, #startBtn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+#restartBtn:hover, #exitBtn:hover, #startBtn:hover {
+    background-color: var(--highlight-color);
+}
+
+#status {
     margin-top: 20px;
+    font-size: 1rem;
+    color: var(--highlight-color);
+}
+
+.score-table {
+    margin-top: 20px;
+    text-align: left;
+    background: var(--main-bg-color-light);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .score-table {
+    background: var(--main-bg-color-dark);
+}
+
+.score-table table {
+    width: 100%;
     border-collapse: collapse;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background 0.5s, box-shadow 0.5s;
+    font-size: 0.8rem;
 }
 
-body.dark-mode table {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-th, td {
-    padding: 15px;
-    border: 1px solid #61dafb;
+.score-table th, .score-table td {
+    border: 1px solid var(--highlight-color);
+    padding: 10px;
     text-align: center;
 }
 
-th {
-    background: linear-gradient(135deg, #61dafb 0%, #21a1f1 100%);
-    color: #282c34;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-td {
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: background 0.5s, color 0.5s;
-}
-
-body.dark-mode th {
-    color: #ffffff;
-}
-
-body.dark-mode td {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #ffffff;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.5);
+/* Responsividad */
+@media (max-width: 480px) {
+    .players input {
+        width: 100%;
     }
-    to {
-        opacity: 1;
-        transform: scale(1);
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .cell {
+        font-size: 1.5rem;
     }
 }
+
